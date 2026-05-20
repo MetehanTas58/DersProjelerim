@@ -14,5 +14,7 @@ export class Blog {
   events() {
     let self = this;
 
+
+    
   }
 }
