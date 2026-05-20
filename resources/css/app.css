@@ -1,0 +1,13 @@
+table.table-striped tbody tr.selected > td,
+table.table-striped tbody tr.selected > th,
+#usersTable tbody tr.selected > td {
+    background-color: #0d6efd !important;
+    --bs-table-striped-bg: #0d6efd;
+    --bs-table-accent-bg: #0d6efd;
+    color: #fff !important;
+}
+
+#usersTable tbody tr.selected a,
+#usersTable tbody tr.selected .btn {
+    color: #fff !important;
+}
