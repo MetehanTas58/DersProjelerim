@@ -7,6 +7,7 @@ use App\Http\Controllers\Pages\PagesController;
 use App\Http\Controllers\Pages\UsersController;
 use App\Http\Controllers\Pages\BlogController;
 use App\Http\Controllers\Api\UsersApiController;
+use App\Http\Controllers\Api\BlogApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +38,22 @@ Route::get('/users/edit/{param}',[UsersController::class,'edit'])->name('users/e
 
 
 
-Route::post('/api/users/getData',[UsersApiController::class,'getData'])->middleware('auth');
+Route::get('/api/users/getData',[UsersApiController::class,'getData'])->middleware('auth');
 Route::post('/api/users/saveUser',[UsersApiController::class,'saveUser'])->middleware('auth');
 Route::post('/api/users/delUser',[UsersApiController::class,'delUser'])->middleware('auth');
 Route::post('/api/users/createAdmin',[UsersApiController::class,'createAdmin'])->middleware('auth');
 
+//Route::post('/api/blog/getData',[BlogApiController::class,'getData'])->middleware('auth');
+
+Route::get('/api/blog/getData',[BlogApiController::class,'getData'])->middleware('auth');
+
 
 Route::get('/blog',[BlogController::class,'index'])->name('blog')->middleware('auth');
+Route::get('/blog/new',[BlogController::class,'new'])->name('blog.new')->middleware('auth');
+Route::post('/api/Blog/delBlog',[BlogApiController::class,'delBlog'])->middleware('auth');
+Route::post('/api/Blog/saveBlog',[BlogApiController::class,'saveBlog'])->middleware('auth');
+Route::post('/api/Blog/toggleStatus',[BlogApiController::class,'toggleStatus'])->middleware('auth');
+Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])
+    ->name('blog.edit')
+    ->middleware('auth');
+    

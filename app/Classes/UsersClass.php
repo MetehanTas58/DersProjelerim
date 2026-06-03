@@ -37,7 +37,7 @@ class UsersClass
                 ->make(true);
 
         } catch (\Throwable $th) {
-            return reaponae()->json([
+            return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage()
             ]);

@@ -51,7 +51,7 @@ export class Users {
       scrolly:"44vh",
       ajax: {
         url: "/api/users/getData",
-        type: "POST"
+        type: "GET"
       },
       columns: [
         { data: "name", name: "name" },
