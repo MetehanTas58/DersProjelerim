@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 
-
 class BlogClass
 {
 
