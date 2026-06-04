@@ -35,4 +35,14 @@ class BlogApiController extends Controller
         $class = new BlogClass();
         return response()->json($class->toggleStatus());
     }
+    public function passive()
+    {
+        $class = new BlogClass();
+        return response()->json($class->passive());
+    }
+     public function active()
+    {
+        $class = new BlogClass();
+        return response()->json($class->active());
+    }
 }

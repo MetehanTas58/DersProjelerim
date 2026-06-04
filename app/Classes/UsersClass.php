@@ -81,7 +81,7 @@ class UsersClass
 
             return [
                 "status" => false,
-                "message" => "Kullanıcı kaydı başarısız. Hata: " . $th->getMessage()
+                "message" => "Kullanıcı silinmesi başarısız. Hata: " . $th->getMessage()
             ];
         }
     }

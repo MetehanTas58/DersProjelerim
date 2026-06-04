@@ -26,6 +26,7 @@ export class Blog {
       if (id == undefined) {
         Swal.fire("Hata", "Lütfen bir blog/haber seçiniz", "error");
         return;
+
       }
       window.location.href = "/blog/edit/" + id;
     }).on("click", ".delBlogBtn", function () {
@@ -44,7 +45,18 @@ export class Blog {
       self.toggleStatus(blog_id, status);
     }).on("change", "#filterStatus", function () {
       $("#blogTable").DataTable().ajax.reload();
-    });
+    }).on("click", ".passiveBtn", function () {
+      const blog_id = $(this).attr('data_id');
+      self.passive(blog_id);
+    }).on("click", ".activeBtn", function () {
+      const blog_id = $(this).attr('data_id');
+      self.active(blog_id);
+    })
+
+
+
+
+
   }
 
   getData() {
@@ -69,7 +81,6 @@ export class Blog {
         { data: "action", name: "action" }
       ],
       createdRow: function (row, data) {
-        console.log("test", row, data)
         $(row).attr("data-id", data.id);
       }
     });
@@ -157,6 +168,70 @@ export class Blog {
 
     } catch (error) {
       console.error(error);
+      Swal.fire(
+        'Hata',
+        error.response?.data?.message || 'Sunucu hatası oluştu',
+        'error'
+      );
+    }
+
+  }
+  async passive(id) {
+    const self = this;
+    try {
+      const onay = await Swal.fire({
+        title: "Emin misiniz?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Evet",
+        cancelButtonText: "Hayır"
+      });
+      if (!onay.isConfirmed) return;
+
+      const { data } = await axios.post('/api/blog/passive', { blog_id: id });
+      if (data && data.status) {
+        Swal.fire({ title: 'Bilgi', text: data.message, icon: 'success' }).then(() => {
+          self.getData();
+        })
+      } else {
+        Swal.fire('Hata', data.message || 'Bir hata oluştu', 'error');
+      }
+
+    } catch (error) {
+      console.error(error);
+
+      Swal.fire(
+        'Hata',
+        error.response?.data?.message || 'Sunucu hatası oluştu',
+        'error'
+      );
+    }
+  }
+
+  async active(id) {
+    const self = this;
+    try {
+      const onay = await Swal.fire({
+        title: "Emin misiniz?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Evet",
+        cancelButtonText: "Hayır"
+      });
+      if (!onay.isConfirmed) return;
+
+      const { data } = await axios.post('/api/blog/active', { blog_id: id });
+      if (data && data.status) {
+        Swal.fire({ title: 'Bilgi', text: data.message, icon: 'success' }).then(() => {
+          self.getData();
+        })
+      } else {
+        Swal.fire('Hata', data.message || 'Bir hata oluştu', 'error');
+      }
+
+    } catch (error) {
+      console.error(error);
+
       Swal.fire(
         'Hata',
         error.response?.data?.message || 'Sunucu hatası oluştu',

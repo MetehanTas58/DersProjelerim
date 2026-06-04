@@ -49,8 +49,8 @@ class BlogClass
                 })
                 ->addColumn('action', function ($blog) {
                     $statusBtn = $blog->status == 1 
-                        ? '<a href="#" class="btn btn-warning btn-sm me-2 min-btn-table toggleStatusBtn" data_id="' . $blog->id . '" data_status="0">Pasif Yap</a>'
-                        : '<a href="#" class="btn btn-warning btn-sm me-2 min-btn-table toggleStatusBtn" data_id="' . $blog->id . '" data_status="1">Aktif Yap</a>';
+                        ? '<a href="#" class="btn btn-warning btn-sm me-2 min-btn-table passiveBtn" data_id="' . $blog->id . '" data_status="0">Pasif Yap</a>'
+                        : '<a href="#" class="btn btn-warning btn-sm me-2 min-btn-table activeBtn" data_id="' . $blog->id . '" data_status="1">Aktif Yap</a>';
 
                     return '<a href="' . route('blog.edit', $blog->id) . '" class="btn btn-primary btn-sm me-2 min-btn-table">Düzenle</a>'
                         . $statusBtn
@@ -187,4 +187,67 @@ class BlogClass
         }
     }
 
+        public function passive()
+    {
+        try {
+
+            $blog_id = request()->get('blog_id');
+            if ($blog_id == null) {
+                return ["status" => false, "message" => "Parametre Bilgileri Alınmadı."];
+            }
+
+            $mdl = Blogs::find($blog_id);
+            if ($mdl == null) {
+                return ["status" => false, "message" => "Blog/Haber Bulunamadı."];
+            }
+
+            $mdl->status = 0;
+            $mdl->update_user_id = Auth::user()->id;
+
+            if ($mdl->save()) {
+                return ["status" => true, "message" => "Blog kaydı başarıyla pasif yapıldı."];
+            } else {
+                return ["status" => false, "message" => "İşlem başarısız."];
+            }
+
+        } catch (\Throwable $th) {
+
+            return [
+                "status" => false,
+                "message" => "Blog kaydı pasif yapılırken hata oluştu. Hata: " . $th->getMessage()
+            ];
+        }
+    }
+
+    public function active()
+    {
+        try {
+
+            $blog_id = request()->get('blog_id');
+            if ($blog_id == null) {
+                return ["status" => false, "message" => "Parametre Bilgileri Alınmadı."];
+            }
+
+            $mdl = Blogs::find($blog_id);
+            if ($mdl == null) {
+                return ["status" => false, "message" => "Blog/Haber Bulunamadı."];
+            }
+
+            $mdl->status = 1;
+            $mdl->update_user_id = Auth::user()->id;
+
+            if ($mdl->save()) {
+                return ["status" => true, "message" => "Blog kaydı başarıyla aktif yapıldı."];
+            } else {
+                return ["status" => false, "message" => "İşlem başarısız."];
+            }
+
+        } catch (\Throwable $th) {
+
+            return [
+                "status" => false,
+                "message" => "Blog kaydı aktif yapılırken hata oluştu. Hata: " . $th->getMessage()
+            ];
+        }
+    }
 }

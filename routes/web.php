@@ -46,6 +46,9 @@ Route::post('/api/users/createAdmin',[UsersApiController::class,'createAdmin'])-
 //Route::post('/api/blog/getData',[BlogApiController::class,'getData'])->middleware('auth');
 
 Route::get('/api/blog/getData',[BlogApiController::class,'getData'])->middleware('auth');
+Route::post('/api/blog/passive',[BlogApiController::class,'passive'])->middleware('auth');
+Route::post('/api/blog/active',[BlogApiController::class,'active'])->middleware('auth');
+
 
 
 Route::get('/blog',[BlogController::class,'index'])->name('blog')->middleware('auth');
