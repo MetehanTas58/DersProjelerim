@@ -32,7 +32,7 @@
                     <select id="filterStatus" class="form-select list-cmb type-cmb bg-light border-1" style="width: 200px;">
                         <option value="0"selected>Tümü</option>
                              <option value="1">Haber</option>
-                        <option value="2">Blok</option>
+                        <option value="2">Blog</option>
                     </select>
                 </div>
                 
