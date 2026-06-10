@@ -78,6 +78,17 @@ class BlogClass
             $data = request()->all();
             $blog_id = $data['blog_id'] ?? null;
 
+            // Validasyon - kaydetmeden önce kontrol et
+            if (empty($data['title'])) {
+                return ["status" => false, "message" => "Başlık alanı boş bırakılamaz."];
+            }
+            if (empty($data['description'])) {
+                return ["status" => false, "message" => "Açıklama alanı boş bırakılamaz."];
+            }
+            if (empty($data['content'])) {
+                return ["status" => false, "message" => "İçerik alanı boş bırakılamaz."];
+            }
+
             if ($blog_id) {
                 $blog = Blogs::find($blog_id);
                 if (!$blog) {
@@ -93,13 +104,13 @@ class BlogClass
             $blog->type_id = $data['type_id'] ?? $blog->type_id;
 
             if ($blog->save()) {
-                // Update translations (default lang 'tr')
+                // Çeviri güncelle (varsayılan dil 'tr')
                 \Illuminate\Support\Facades\DB::table('blogs_translate')->updateOrInsert(
                     ['blog_id' => $blog->id, 'lang_code' => 'tr'],
                     [
-                        'title' => $data['title'] ?? '',
-                        'description' => $data['description'] ?? '',
-                        'content' => $data['content'] ?? '',
+                        'title' => $data['title'],
+                        'description' => $data['description'],
+                        'content' => $data['content'],
                         'create_user_id' => Auth::user()->id,
                         'update_user_id' => Auth::user()->id,
                         'updated_at' => now(),
