@@ -65,6 +65,20 @@
 
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
+                                        <label for="cover_image" class="form-label fw-semibold text-secondary">
+                                            <i class="fas fa-image me-1"></i> Kapak Görseli
+                                        </label>
+                                        <label for="cover_image" class="cover-upload-label">
+                                            <div class="cover-upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                            <div class="cover-upload-text">Görsel seçmek için tıklayın</div>
+                                            <div class="cover-upload-hint">PNG, JPG, WEBP desteklenir</div>
+                                            <input type="file" id="cover_image" name="cover_image" class="cover-file-input" accept="image/*">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-group">
                                         <label for="content" class="form-label fw-semibold text-secondary">Detaylı İçerik</label>
                                         <textarea class="form-control content-editor bg-light border-0 placeholder-muted shadow-sm rounded-3" 
                                             id="blogContent" name="content" rows="6" placeholder="Detaylı İçerik Yazınız">{{ $blog == null ? '' : $blog->content }}</textarea>
@@ -195,6 +209,51 @@
         border: none !important;
         border-right: 1px solid #dee2e6 !important;
         background-color: #f8f9fa !important;
+    }
+
+    /* Kapak görseli yükleme alanı */
+    .cover-upload-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 120px;
+        border: 2px dashed #ced4da;
+        border-radius: 0.75rem;
+        background-color: #f8f9fa;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        padding: 1.5rem;
+        gap: 6px;
+        color: #adb5bd;
+        text-align: center;
+    }
+
+    .cover-upload-label:hover {
+        border-color: #0d6efd;
+        background-color: #eef4ff;
+        color: #0d6efd;
+    }
+
+    .cover-upload-icon {
+        font-size: 2rem;
+        line-height: 1;
+    }
+
+    .cover-upload-text {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .cover-upload-hint {
+        font-size: 0.75rem;
+        color: #adb5bd;
+    }
+
+    .cover-file-input {
+        display: none;
     }
 </style>
 @endsection
