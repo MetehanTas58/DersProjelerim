@@ -11,7 +11,13 @@
                         </h3>
                     </div>
                     <div class="col-sm-12">
-                        <span class="badge badge-primary bg-primary float-end" style="font-style:italic;">Blog/Haber {{ $blog == null ? 'Kayıt' : 'Güncelleme' }} Bölümü.</span>
+                        <div class="float-end d-flex align-items-center gap-2">
+                            <select class="lang-select-header" name="lang_code">
+                                <option value="tr" selected>TR</option>
+                                <option value="en">EN</option>
+                            </select>
+                            <span class="badge badge-primary bg-primary" style="font-style:italic;">Blog/Haber {{ $blog == null ? 'Kayıt' : 'Güncelleme' }} Bölümü.</span>
+                        </div>
                         <div>
                             <a href="{{ route('blog') }}"
                                 class="btn btn-outline-secondary px-4 me-2 rounded-pill shadow-sm">
@@ -141,6 +147,54 @@
 
     .card:hover {
         box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+    }
+
+    /* Dil seçici - input-group içinde düzgün görünmesi için */
+    .lang-select-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        width: auto;
+    }
+
+    /* Dil seçici - başlık alanında badge yanında */
+    .lang-select-header {
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        background-color: #fff;
+        color: #6c757d;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .lang-select-header:focus {
+        box-shadow: none;
+        border-color: #86b7fe;
+    }
+
+    .lang-select {
+        height: 100%;
+        border: none;
+        border-right: 1px solid #dee2e6 !important;
+        border-radius: 0 !important;
+        background-color: #f8f9fa;
+        color: #6c757d;
+        font-size: 0.875rem;
+        padding: 0 0.5rem;
+        min-width: 70px;
+        width: 70px;
+        cursor: pointer;
+    }
+
+    .lang-select:focus {
+        box-shadow: none !important;
+        border: none !important;
+        border-right: 1px solid #dee2e6 !important;
+        background-color: #f8f9fa !important;
     }
 </style>
 @endsection
