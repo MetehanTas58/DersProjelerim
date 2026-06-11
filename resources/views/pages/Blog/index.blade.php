@@ -28,11 +28,11 @@
                     </select>
                 </div>
                 <div class="d-flex align-items-center">
-                    <label for="filterStatus" class="me-2 mb-0 fw-semibold text-secondary" style="white-space: nowrap;">Tip</label>
-                    <select id="filterStatus" class="form-select list-cmb type-cmb bg-light border-1" style="width: 200px;">
-                        <option value="0"selected>Tümü</option>
-                             <option value="1">Haber</option>
-                        <option value="2">Blog</option>
+                    <label for="filterType" class="me-2 mb-0 fw-semibold text-secondary" style="white-space: nowrap;">Tip</label>
+                    <select id="filterType" class="form-select list-cmb type-cmb bg-light border-1" style="width: 200px;">
+                        <option value="0" selected>Tümü</option>
+                        <option value="1">Blog</option>
+                        <option value="2">Haber</option>
                     </select>
                 </div>
                 

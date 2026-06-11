@@ -15,8 +15,8 @@ export class Blog {
   events() {
     let self = this;
 
-    $("body").on("changer", ".list-cmb", function () {
-      self.getData();
+    $("body").on("change", ".list-cmb", function () {
+      $("#blogTable").DataTable().ajax.reload();
     })
 
     $("body").on("click", ".saveBlogBtn", function () {
@@ -43,8 +43,6 @@ export class Blog {
       const blog_id = $(this).attr('data_id');
       const status = $(this).attr('data_status');
       self.toggleStatus(blog_id, status);
-    }).on("change", "#filterStatus", function () {
-      $("#blogTable").DataTable().ajax.reload();
     }).on("click", ".passiveBtn", function () {
       const blog_id = $(this).attr('data_id');
       self.passive(blog_id);
@@ -69,7 +67,7 @@ export class Blog {
         url: "/api/blog/getData",
         type: "GET",
         data: function (d) {
-          d.type = $(".type.cmb").val();
+          d.type = $(".type-cmb").val();
           d.status = $(".status-cmb").val();
         },
       },
