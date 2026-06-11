@@ -1,0 +1,77 @@
+<?php
+
+return [
+    'welcome' => 'Welcome',
+    'home' => 'Home',
+    'about' => 'About Us',
+    'blog_management' => 'Blog/News ',
+
+    // Sidebar
+    'apps' => 'Applications',
+    'dashboard' => 'Dashboard',
+    'page_operations' => 'Page Operations',
+    'blog_news' => 'Blog & News',
+    'galleries' => 'Galleries',
+    'popup_management' => 'Popup Management',
+    'settings' => 'Settings',
+    'user_management' => 'User Management',
+
+    // Navbar Profile Dropdown
+    'profile' => 'Profile',
+    'logout' => 'Logout',
+
+    // Blog Index
+    'blog_news_list' => 'Blog/News List',
+    'blog_news_desc' => 'You can list your blog and news records here.',
+    'add_new' => 'Add New',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'status' => 'Status',
+    'all' => 'All',
+    'active' => 'Active',
+    'passive' => 'Passive',
+    'type' => 'Type',
+    'blog' => 'Blog',
+    'news' => 'News',
+    'title' => 'Title',
+    'description' => 'Description',
+    'action' => 'Action',
+
+    // Blog Edit / Create
+    'create' => 'Create',
+    'update' => 'Update',
+    'operations' => 'Operations',
+    'section' => 'Section',
+    'back_to_list' => 'Back to List',
+    'save_information' => 'Save Information',
+    'enter_title' => 'Enter Title',
+    'enter_short_desc' => 'Enter Short Description',
+    'cover_image' => 'Cover Image',
+    'click_to_select' => 'Click to select image',
+    'supported_formats' => 'PNG, JPG, WEBP supported',
+    'detailed_content' => 'Detailed Content',
+    'enter_detailed_content' => 'Enter Detailed Content',
+
+    // JS / SweetAlert / API Translations
+    'error' => 'Error',
+    'success' => 'Success',
+    'info' => 'Info',
+    'select_item' => 'Please select a blog/news record.',
+    'are_you_sure' => 'Are you sure?',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'validation_title_required' => 'Title field cannot be empty.',
+    'validation_description_required' => 'Description field cannot be empty.',
+    'validation_content_required' => 'Content field cannot be empty.',
+    'passive_success' => 'Blog status has been successfully set to passive.',
+    'active_success' => 'Blog status has been successfully set to active.',
+    'delete_success' => 'Blog record has been successfully deleted.',
+    'save_success' => 'Blog/News has been successfully saved.',
+    'fail_status' => 'Failed to update status.',
+    'fail_delete' => 'An error occurred while deleting the blog/news.',
+    'fail_save' => 'An error occurred while saving.',
+    'not_found' => 'Blog/News not found.',
+    'param_missing' => 'Parameter information not received.',
+    'make_passive' => 'Make Passive',
+    'make_active' => 'Make Active',
+];

@@ -2,30 +2,26 @@
 
 @section('content')
     <div class="row mb-3">
-        <div class="col-12 d-flex justify-content-between align-items-center">
+         <div class="col-12 d-flex justify-content-between align-items-center">
             <h4 class="mb-0 text-primary fw-bold">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3 class="">Blog/Haber {{ $blog == null ? 'Kayıt' : 'Güncelleme' }} İşlemleri
+                        <h3 class="">{{ __('messages.blog_management') }} {{ $blog == null ? __('messages.create') : __('messages.update') }} {{ __('messages.operations') }}
                             {{ $blog == null ? '' : " - " . $blog->title }}
                         </h3>
                     </div>
                     <div class="col-sm-12">
                         <div class="float-end d-flex align-items-center gap-2">
-                            <select class="lang-select-header" name="lang_code">
-                                <option value="tr" selected>TR</option>
-                                <option value="en">EN</option>
-                            </select>
-                            <span class="badge badge-primary bg-primary" style="font-style:italic;">Blog/Haber {{ $blog == null ? 'Kayıt' : 'Güncelleme' }} Bölümü.</span>
+                            <span class="badge badge-primary bg-primary" style="font-style:italic;">{{ __('messages.blog_management') }} {{ $blog == null ? __('messages.create') : __('messages.update') }} {{ __('messages.section') }}.</span>
                         </div>
                         <div>
                             <a href="{{ route('blog') }}"
                                 class="btn btn-outline-secondary px-4 me-2 rounded-pill shadow-sm">
-                                <i class="fas fa-arrow-left me-1"></i> Listeye Dön
+                                <i class="fas fa-arrow-left me-1"></i> {{ __('messages.back_to_list') }}
                             </a>
                             <button type="button"
                                 class="btn btn-primary px-4 rounded-pill shadow-sm btn-save-blog saveBlogBtn">
-                                <i class="fas fa-save me-1"></i> Bilgileri Kaydet
+                                <i class="fas fa-save me-1"></i> {{ __('messages.save_information') }}
                             </button>
                         </div>
                     </div>
@@ -37,13 +33,13 @@
                             <div class="row g-4">
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
-                                        <label for="title" class="form-label fw-semibold text-secondary">Başlık</label>
+                                        <label for="title" class="form-label fw-semibold text-secondary">{{ __('messages.title') }}</label>
                                         <div class="input-group input-group-lg shadow-sm rounded-3">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-heading text-muted"></i></span>
                                             <input type="text"
                                                 class="form-control title bg-light border-0 placeholder-muted"
-                                                id="title" name="title" placeholder="Başlık Yazınız"
+                                                id="title" name="title" placeholder="{{ __('messages.enter_title') }}"
                                                 value="{{ $blog == null ? '' : $blog->title }}">
                                         </div>
                                     </div>
@@ -51,13 +47,13 @@
 
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
-                                        <label for="description" class="form-label fw-semibold text-secondary">Kısa Açıklama</label>
+                                        <label for="description" class="form-label fw-semibold text-secondary">{{ __('messages.description') }}</label>
                                         <div class="input-group input-group-lg shadow-sm rounded-3">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-align-left text-muted"></i></span>
                                             <input type="text"
                                                 class="form-control description bg-light border-0 placeholder-muted" 
-                                                id="description" name="description" placeholder="Kısa Açıklama Yazınız"
+                                                id="description" name="description" placeholder="{{ __('messages.enter_short_desc') }}"
                                                 value="{{ $blog == null ? '' : $blog->description }}">
                                         </div>
                                     </div>
@@ -66,12 +62,12 @@
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
                                         <label for="cover_image" class="form-label fw-semibold text-secondary">
-                                            <i class="fas fa-image me-1"></i> Kapak Görseli
+                                            <i class="fas fa-image me-1"></i> {{ __('messages.cover_image') }}
                                         </label>
                                         <label for="cover_image" class="cover-upload-label">
                                             <div class="cover-upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                                            <div class="cover-upload-text">Görsel seçmek için tıklayın</div>
-                                            <div class="cover-upload-hint">PNG, JPG, WEBP desteklenir</div>
+                                            <div class="cover-upload-text">{{ __('messages.click_to_select') }}</div>
+                                            <div class="cover-upload-hint">{{ __('messages.supported_formats') }}</div>
                                             <input type="file" id="cover_image" name="cover_image" class="cover-file-input" accept="image/*">
                                         </label>
                                     </div>
@@ -79,23 +75,23 @@
 
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
-                                        <label for="content" class="form-label fw-semibold text-secondary">Detaylı İçerik</label>
+                                        <label for="content" class="form-label fw-semibold text-secondary">{{ __('messages.detailed_content') }}</label>
                                         <textarea class="form-control content-editor bg-light border-0 placeholder-muted shadow-sm rounded-3" 
-                                            id="blogContent" name="content" rows="6" placeholder="Detaylı İçerik Yazınız">{{ $blog == null ? '' : $blog->content }}</textarea>
+                                            id="blogContent" name="content" rows="6" placeholder="{{ __('messages.enter_detailed_content') }}">{{ $blog == null ? '' : $blog->content }}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
-                                        <label for="type_id" class="form-label fw-semibold text-secondary">Tip <span
+                                        <label for="type_id" class="form-label fw-semibold text-secondary">{{ __('messages.type') }} <span
                                                 class="text-danger">*</span></label>
                                         <div class="input-group input-group-lg shadow-sm rounded-3">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-list text-muted"></i></span>
                                             <select class="form-select type_id bg-light border-0 text-muted" id="type_id"
                                                 name="type_id">
-                                                <option value="1" {{ $blog == null ? 'selected' : ($blog->type_id == 1 ? 'selected' : '') }}>Blog</option>
-                                                <option value="2" {{ $blog == null ? '' : ($blog->type_id == 2 ? 'selected' : '') }}>Haber</option>
+                                                <option value="1" {{ $blog == null ? 'selected' : ($blog->type_id == 1 ? 'selected' : '') }}>{{ __('messages.blog') }}</option>
+                                                <option value="2" {{ $blog == null ? '' : ($blog->type_id == 2 ? 'selected' : '') }}>{{ __('messages.news') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -103,15 +99,15 @@
 
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
-                                        <label for="status" class="form-label fw-semibold text-secondary">Durum <span
+                                        <label for="status" class="form-label fw-semibold text-secondary">{{ __('messages.status') }} <span
                                                 class="text-danger">*</span></label>
                                         <div class="input-group input-group-lg shadow-sm rounded-3">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-check-circle text-muted"></i></span>
                                             <select class="form-select status bg-light border-0 text-muted" id="status"
                                                 name="status">
-                                                <option value="1" {{ $blog == null ? 'selected' : ($blog->status == 1 ? 'selected' : '') }}>Aktif</option>
-                                                <option value="0" {{ $blog == null ? '' : ($blog->status == 0 ? 'selected' : '') }}>Pasif</option>
+                                                <option value="1" {{ $blog == null ? 'selected' : ($blog->status == 1 ? 'selected' : '') }}>{{ __('messages.active') }}</option>
+                                                <option value="0" {{ $blog == null ? '' : ($blog->status == 0 ? 'selected' : '') }}>{{ __('messages.passive') }}</option>
                                             </select>
                                         </div>
                                     </div>

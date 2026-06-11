@@ -20,10 +20,21 @@ class BlogController extends Controller
 
     public function edit($id)
     {
-        $blog = Blogs::leftJoin('blogs_translate as bt', 'bt.blog_id', '=', 'blogs.id')
-            ->select('blogs.*', 'bt.title', 'bt.description', 'bt.content')
+        $blog = Blogs::leftJoin('blogs_translate as bt', function ($join) {
+                $join->on('bt.blog_id', '=', 'blogs.id')
+                     ->where('bt.lang_code', '=', app()->getLocale());
+            })
+            ->leftJoin('blogs_translate as bt_fallback', function ($join) {
+                $join->on('bt_fallback.blog_id', '=', 'blogs.id')
+                     ->where('bt_fallback.lang_code', '=', 'tr');
+            })
+            ->select(
+                'blogs.*',
+                \Illuminate\Support\Facades\DB::raw('COALESCE(bt.title, bt_fallback.title) as title'),
+                \Illuminate\Support\Facades\DB::raw('COALESCE(bt.description, bt_fallback.description) as description'),
+                \Illuminate\Support\Facades\DB::raw('COALESCE(bt.content, bt_fallback.content) as content')
+            )
             ->where('blogs.id', $id)
-            ->where('bt.lang_code', 'tr')
             ->firstOrFail();
 
         return view('pages.Blog.edit', compact('blog'));

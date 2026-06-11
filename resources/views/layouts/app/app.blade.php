@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
 	<meta charset="utf-8">
@@ -13,6 +13,18 @@
 
 	<title>TechFlow - CMS</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        window.translations = {
+            error: "{{ __('messages.error') }}",
+            success: "{{ __('messages.success') }}",
+            info: "{{ __('messages.info') }}",
+            select_item: "{{ __('messages.select_item') }}",
+            are_you_sure: "{{ __('messages.are_you_sure') }}",
+            yes: "{{ __('messages.yes') }}",
+            no: "{{ __('messages.no') }}"
+        };
+    </script>
+
 	<link href="/template/static/css/app.css" rel="stylesheet">
     @vite(['resources/css/app.css'])
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">

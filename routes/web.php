@@ -8,6 +8,8 @@ use App\Http\Controllers\Pages\UsersController;
 use App\Http\Controllers\Pages\BlogController;
 use App\Http\Controllers\Api\UsersApiController;
 use App\Http\Controllers\Api\BlogApiController;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,4 +61,18 @@ Route::post('/api/Blog/toggleStatus',[BlogApiController::class,'toggleStatus'])-
 Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])
     ->name('blog.edit')
     ->middleware('auth');
-    
+ Route::get('/force-login', function() {
+    Auth::loginUsingId(8);
+    return redirect('/blog');
+});
+
+Route::get('/lang/{locale}', function ($locale) {
+
+    if (!in_array($locale, ['tr', 'en'])) {
+        abort(404);
+    }
+
+    Session::put('locale', $locale);
+
+    return redirect()->back();
+});

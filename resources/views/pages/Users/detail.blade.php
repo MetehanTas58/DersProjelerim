@@ -133,7 +133,6 @@
                 @section('js')
                     <script type="text/javascript">
 
-
                         var checkInterval = setInterval(function () {
                             if (app.loader !== undefined && app.loader !== null) {
                                 app.loader.setModule("Users");

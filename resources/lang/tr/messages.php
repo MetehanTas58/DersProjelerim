@@ -1,0 +1,77 @@
+<?php
+
+return [
+    'welcome' => 'Hoş Geldiniz',
+    'home' => 'Anasayfa',
+    'about' => 'Hakkımızda',
+    'blog_management' => 'Blog/Haber ',
+
+    // Sidebar
+    'apps' => 'Uygulamalar',
+    'dashboard' => 'Dashboard',
+    'page_operations' => 'Sayfa İşlemleri',
+    'blog_news' => 'Blog & Haber',
+    'galleries' => 'Galeriler',
+    'popup_management' => 'Popup Yönetimi',
+    'settings' => 'Ayarlar',
+    'user_management' => 'Kullanıcı Yönetimi',
+
+    // Navbar Profile Dropdown
+    'profile' => 'Profilim',
+    'logout' => 'Çıkış Yap',
+
+    // Blog Index
+    'blog_news_list' => 'Blog/Haber Listesi',
+    'blog_news_desc' => 'Blog/Haber ile blog ve haber kayıtlarınızı listeleyebilirsiniz.',
+    'add_new' => 'Yeni Ekle',
+    'edit' => 'Düzenle',
+    'delete' => 'Sil',
+    'status' => 'Durum',
+    'all' => 'Tümü',
+    'active' => 'Aktif',
+    'passive' => 'Pasif',
+    'type' => 'Tip',
+    'blog' => 'Blog',
+    'news' => 'Haber',
+    'title' => 'Başlık',
+    'description' => 'Açıklama',
+    'action' => 'İşlem',
+
+    // Blog Edit / Create
+    'create' => 'Kayıt',
+    'update' => 'Güncelleme',
+    'operations' => 'İşlemleri',
+    'section' => 'Bölümü',
+    'back_to_list' => 'Listeye Dön',
+    'save_information' => 'Bilgileri Kaydet',
+    'enter_title' => 'Başlık Yazınız',
+    'enter_short_desc' => 'Kısa Açıklama Yazınız',
+    'cover_image' => 'Kapak Görseli',
+    'click_to_select' => 'Görsel seçmek için tıklayın',
+    'supported_formats' => 'PNG, JPG, WEBP desteklenir',
+    'detailed_content' => 'Detaylı İçerik',
+    'enter_detailed_content' => 'Detaylı İçerik Yazınız',
+
+    // JS / SweetAlert / API Translations
+    'error' => 'Hata',
+    'success' => 'Bilgi',
+    'info' => 'Bilgi',
+    'select_item' => 'Lütfen bir blog/haber seçiniz.',
+    'are_you_sure' => 'Emin misiniz?',
+    'yes' => 'Evet',
+    'no' => 'Hayır',
+    'validation_title_required' => 'Başlık alanı boş bırakılamaz.',
+    'validation_description_required' => 'Açıklama alanı boş bırakılamaz.',
+    'validation_content_required' => 'İçerik alanı boş bırakılamaz.',
+    'passive_success' => 'Blog kaydı başarıyla pasif yapıldı.',
+    'active_success' => 'Blog kaydı başarıyla aktif yapıldı.',
+    'delete_success' => 'Blog/Haber kaydı başarıyla silindi.',
+    'save_success' => 'Blog/Haber başarıyla kaydedildi.',
+    'fail_status' => 'İşlem başarısız.',
+    'fail_delete' => 'Blog/Haber kaydı silinirken bir hata oluştu.',
+    'fail_save' => 'Kaydedilirken hata oluştu.',
+    'not_found' => 'Blog/Haber Bulunamadı.',
+    'param_missing' => 'Parametre Bilgileri Alınmadı.',
+    'make_passive' => 'Pasif Yap',
+    'make_active' => 'Aktif Yap',
+];

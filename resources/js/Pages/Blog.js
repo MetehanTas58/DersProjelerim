@@ -24,7 +24,7 @@ export class Blog {
     }).on("click", ".editBlogBtn", function () {
       const id = $(".selected").attr("data-id");
       if (id == undefined) {
-        Swal.fire("Hata", "Lütfen bir blog/haber seçiniz", "error");
+        Swal.fire(window.translations.error || "Hata", window.translations.select_item || "Lütfen bir blog/haber seçiniz", "error");
         return;
 
       }
@@ -34,7 +34,7 @@ export class Blog {
       if (blog_id == undefined) {
         blog_id = $(".selected").attr("data-id");
         if (blog_id == undefined) {
-          Swal.fire("Hata", "Lütfen bir blog/haber seçiniz", "error");
+          Swal.fire(window.translations.error || "Hata", window.translations.select_item || "Lütfen bir blog/haber seçiniz", "error");
           return;
         }
       }
@@ -109,18 +109,18 @@ export class Blog {
       const { data } = await axios.post('/api/Blog/saveBlog', blogdata);
 
       if (data && data.status) {
-        Swal.fire({ title: 'Bilgi', text: data.message, icon: 'success' }).then(() => {
+        Swal.fire({ title: window.translations.success || 'Bilgi', text: data.message, icon: 'success' }).then(() => {
           window.location.href = '/blog';
         })
       } else {
-        Swal.fire('Hata', data.message || 'Bir hata oluştu', 'error');
+        Swal.fire(window.translations.error || 'Hata', data.message || 'Bir hata oluştu', 'error');
       }
 
     } catch (error) {
       console.error(error);
 
       Swal.fire(
-        'Hata',
+        window.translations.error || 'Hata',
         error.response?.data?.message || 'Sunucu hatası oluştu',
         'error'
       );
@@ -130,23 +130,23 @@ export class Blog {
   async delBlog(blog_id) {
     const self = this
     const onay = await Swal.fire({
-      title: "Emin misiniz?",
+      title: window.translations.are_you_sure || "Emin misiniz?",
       icon: "question",
       showCancelButton: true,
-      confirmButtonText: "Evet",
-      cancelButtonText: "Hayır"
+      confirmButtonText: window.translations.yes || "Evet",
+      cancelButtonText: window.translations.no || "Hayır"
     });
 
     if (!onay.isConfirmed) return;
     const { data } = await axios.post('/api/Blog/delBlog', { blog_id: blog_id });
 
     if (data && data.status) {
-      Swal.fire({ title: 'Bilgi', text: data.message, icon: 'success' }).then(() => {
+      Swal.fire({ title: window.translations.success || 'Bilgi', text: data.message, icon: 'success' }).then(() => {
 
       })
       self.getData();
     } else {
-      Swal.fire('Hata', data.message || 'Bir hata oluştu', 'error');
+      Swal.fire(window.translations.error || 'Hata', data.message || 'Bir hata oluştu', 'error');
     }
 
   }
@@ -157,17 +157,17 @@ export class Blog {
       const { data } = await axios.post('/api/Blog/toggleStatus', { blog_id: blog_id, status: status });
 
       if (data && data.status) {
-        Swal.fire({ title: 'Bilgi', text: data.message, icon: 'success' }).then(() => {
+        Swal.fire({ title: window.translations.success || 'Bilgi', text: data.message, icon: 'success' }).then(() => {
           self.getData();
         });
       } else {
-        Swal.fire('Hata', data.message || 'Bir hata oluştu', 'error');
+        Swal.fire(window.translations.error || 'Hata', data.message || 'Bir hata oluştu', 'error');
       }
 
     } catch (error) {
       console.error(error);
       Swal.fire(
-        'Hata',
+        window.translations.error || 'Hata',
         error.response?.data?.message || 'Sunucu hatası oluştu',
         'error'
       );
@@ -178,28 +178,28 @@ export class Blog {
     const self = this;
     try {
       const onay = await Swal.fire({
-        title: "Emin misiniz?",
+        title: window.translations.are_you_sure || "Emin misiniz?",
         icon: "question",
         showCancelButton: true,
-        confirmButtonText: "Evet",
-        cancelButtonText: "Hayır"
+        confirmButtonText: window.translations.yes || "Evet",
+        cancelButtonText: window.translations.no || "Hayır"
       });
       if (!onay.isConfirmed) return;
 
       const { data } = await axios.post('/api/blog/passive', { blog_id: id });
       if (data && data.status) {
-        Swal.fire({ title: 'Bilgi', text: data.message, icon: 'success' }).then(() => {
+        Swal.fire({ title: window.translations.success || 'Bilgi', text: data.message, icon: 'success' }).then(() => {
           self.getData();
         })
       } else {
-        Swal.fire('Hata', data.message || 'Bir hata oluştu', 'error');
+        Swal.fire(window.translations.error || 'Hata', data.message || 'Bir hata oluştu', 'error');
       }
 
     } catch (error) {
       console.error(error);
 
       Swal.fire(
-        'Hata',
+        window.translations.error || 'Hata',
         error.response?.data?.message || 'Sunucu hatası oluştu',
         'error'
       );
@@ -210,33 +210,58 @@ export class Blog {
     const self = this;
     try {
       const onay = await Swal.fire({
-        title: "Emin misiniz?",
+        title: window.translations.are_you_sure || "Emin misiniz?",
         icon: "question",
         showCancelButton: true,
-        confirmButtonText: "Evet",
-        cancelButtonText: "Hayır"
+        confirmButtonText: window.translations.yes || "Evet",
+        cancelButtonText: window.translations.no || "Hayır"
       });
       if (!onay.isConfirmed) return;
 
       const { data } = await axios.post('/api/blog/active', { blog_id: id });
       if (data && data.status) {
-        Swal.fire({ title: 'Bilgi', text: data.message, icon: 'success' }).then(() => {
+        Swal.fire({ title: window.translations.success || 'Bilgi', text: data.message, icon: 'success' }).then(() => {
           self.getData();
         })
       } else {
-        Swal.fire('Hata', data.message || 'Bir hata oluştu', 'error');
+        Swal.fire(window.translations.error || 'Hata', data.message || 'Bir hata oluştu', 'error');
       }
 
     } catch (error) {
       console.error(error);
 
       Swal.fire(
-        'Hata',
+        window.translations.error || 'Hata',
         error.response?.data?.message || 'Sunucu hatası oluştu',
         'error'
       );
+    } 
+  }
+
+  async getBlogData() {
+    const { data } = await axios.post("/api/blogs/getBlogData", {
+      blog_id: $(".blog_id").val(),
+      lang_code: $(".lang").val(),
+    });
+
+    if (data && data.status) {
+      if (data.data != null) {
+        $(".title").val(data.data.title);
+        $(".description").val(data.data.description);
+        $(".type").val(data.data.type_id);
+        $(".status").val(data.data.status);
+        $(".content_text").val(data.data.content);
+      } else {
+        $(".title").val("");
+        $(".description").val("");
+        $(".type").val(1);
+        $(".status").val(1);
+        $(".content_text").val("");
+      }
     }
   }
+
+
 }
 
 window.Blog = Blog;
