@@ -66,6 +66,8 @@
 			@include('layouts.app.footer')
 		</div>
 	</div>
+	<script src="https://cdn.tiny.cloud/1/dhugr1wp0bq5sw4avg4j3ln1786mzdtc3oxplcph7iz54bm6/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
 	@vite(["resources/js/plugins.js"])
     @vite(["resources/js/app.js"])
 	<script src="/template/static/js/app.js"></script>

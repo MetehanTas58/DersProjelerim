@@ -10,13 +10,42 @@ export class Blog {
   load() {
     this.events();
     this.getData();
+    this.initTinyMCE();
+  }
+
+  initTinyMCE() {
+    if ($('#blogContent').length > 0 && typeof tinymce !== 'undefined') {
+      tinymce.init({
+        selector: '#blogContent',
+        plugins: [
+          // Core editing features
+          'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+          // Premium features
+          'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'tinymceai', 'uploadcare', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+        ],
+        toolbar: 'undo redo | tinymceai-chat tinymceai-quickactions tinymceai-review | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [
+          { value: 'First.Name', title: 'First Name' },
+          { value: 'Email', title: 'Email' },
+        ],
+        tinymceai_token_provider: async () => {
+          await fetch(`https://demo.api.tiny.cloud/1/d0g930c0k4b6xlqbanrwq46fj1q063u1vnlv7l1ha86bdvrf/auth/random`, { method: "POST", credentials: "include" });
+          return { token: await fetch(`https://demo.api.tiny.cloud/1/d0g930c0k4b6xlqbanrwq46fj1q063u1vnlv7l1ha86bdvrf/jwt/tinymceai`, { credentials: "include" }).then(r => r.text()) };
+        },
+        uploadcare_public_key: 'b9f18ca3b40c8cf97e0d',
+      });
+    }
   }
 
   events() {
     let self = this;
 
     $("body").on("change", ".list-cmb", function () {
-      $("#blogTable").DataTable().ajax.reload();
+      if ($("#blogTable").length > 0) {
+        $("#blogTable").DataTable().ajax.reload();
+      }
     })
 
     $("body").on("click", ".saveBlogBtn", function () {
@@ -58,11 +87,13 @@ export class Blog {
   }
 
   getData() {
+    if ($("#blogTable").length === 0) return;
+
     const table = $("#blogTable").DataTable({
       processing: true,
       serverSide: true,
       destroy: true,
-      scrolly: "44vh",
+      scrollY: "44vh",
       ajax: {
         url: "/api/blog/getData",
         type: "GET",
@@ -94,6 +125,10 @@ export class Blog {
   }
 
   async saveBlog() {
+    if (typeof tinymce !== 'undefined') {
+      tinymce.triggerSave();
+    }
+
     const blogdata = {
       title: $('.title').val(),
       description: $('.description').val(),
@@ -235,7 +270,7 @@ export class Blog {
         error.response?.data?.message || 'Sunucu hatası oluştu',
         'error'
       );
-    } 
+    }
   }
 
   async getBlogData() {
