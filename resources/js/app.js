@@ -1,5 +1,5 @@
 import { Loader } from "./Loader";
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 export class App {
 
     constructor() {

@@ -14,7 +14,7 @@
     </hr>
     <div class="card">
         <div class="card-header card-border">
-            <a href="{{route('users/new')}}"> <button type="button" class="btn btn-success min-btn">Yeni Ekle</button></a>
+            <a href="{{route('users/new')}}"> <button type="button" class="btn btn-success min-btn"><i class="bi bi-plus-circle"></i>Yeni Ekle</button></a>
             <button type="button" class="btn btn-primary min-btn editUserBtn">Düzenle</button>
             <button type="button" class="btn btn-danger  min-btn delUserBtn">Sil</button>
 

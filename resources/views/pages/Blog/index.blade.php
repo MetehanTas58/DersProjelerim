@@ -14,10 +14,10 @@
             <div class="card-header card-border d-flex justify-content-between align-items-center bg-white py-3">
                 <div>
                     <a href="{{ route('blog.new') }}">
-                        <button type="button" class="btn btn-success min-btn me-2">{{ __('messages.add_new') }}</button>
+                        <button type="button" class="btn btn-success min-btn me-2"><i class="bi bi-plus-circle me-1"></i>{{ __('messages.add_new') }}</button>
                     </a>
-                    <button type="button" class="btn btn-primary min-btn editBlogBtn me-2">{{ __('messages.edit') }}</button>
-                    <button type="button" class="btn btn-danger min-btn delBlogBtn">{{ __('messages.delete') }}</button>
+                    <button type="button" class="btn btn-primary min-btn editBlogBtn me-2"><i class="bi bi-pencil me-1"></i>{{ __('messages.edit') }}</button>
+                    <button type="button" class="btn btn-danger min-btn delBlogBtn"><i class="bi bi-trash me-1"></i>{{ __('messages.delete') }}</button>
                 </div>
                 
                 <div class="d-flex align-items-center">
