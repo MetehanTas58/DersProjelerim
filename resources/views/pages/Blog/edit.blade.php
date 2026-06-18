@@ -113,10 +113,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                              <textarea id="tiny">&lt;p&gt;Encoded HTML content&lt;/p&gt;</textarea>
-
-                                </div>
+                                
                             </div>
                             <input type="hidden" name="blog_id" value="{{ $blog == null ? '' : $blog->id }}" class="blog_id" />
                         </form>

@@ -18,23 +18,20 @@ export class Blog {
       tinymce.init({
         selector: '#blogContent',
         plugins: [
-          // Core editing features
-          'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-          // Premium features
-          'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'tinymceai', 'uploadcare', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+          'accordion', 'advlist', 'anchor', 'autolink', 'autoresize', 'autosave', 
+          'charmap', 'code', 'codesample', 'directionality', 'emoticons', 'fullscreen', 
+          'help', 'image', 'importcss', 'insertdatetime', 'link', 'lists', 'media', 
+          'nonbreaking', 'pagebreak', 'preview', 'quickbars', 'searchreplace', 
+          'table', 'visualblocks', 'visualchars', 'wordcount'
         ],
-        toolbar: 'undo redo | tinymceai-chat tinymceai-quickactions tinymceai-review | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-        mergetags_list: [
-          { value: 'First.Name', title: 'First Name' },
-          { value: 'Email', title: 'Email' },
-        ],
-        tinymceai_token_provider: async () => {
-          await fetch(`https://demo.api.tiny.cloud/1/d0g930c0k4b6xlqbanrwq46fj1q063u1vnlv7l1ha86bdvrf/auth/random`, { method: "POST", credentials: "include" });
-          return { token: await fetch(`https://demo.api.tiny.cloud/1/d0g930c0k4b6xlqbanrwq46fj1q063u1vnlv7l1ha86bdvrf/jwt/tinymceai`, { credentials: "include" }).then(r => r.text()) };
-        },
-        uploadcare_public_key: 'b9f18ca3b40c8cf97e0d',
+        toolbar: 'undo redo | blocks fontfamily fontsize | ' +
+          'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist outdent indent | link image media table | ' +
+          'forecolor backcolor emoticons | code fullscreen preview | help',
+        language: 'tr',
+        menubar: 'file edit view insert format tools table help',
+        branding: false,
+        promotion: false
       });
     }
   }
