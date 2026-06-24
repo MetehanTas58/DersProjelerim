@@ -90,7 +90,6 @@ export class Blog {
       processing: true,
       serverSide: true,
       destroy: true,
-      scrollY: "44vh",
       ajax: {
         url: "/api/blog/getData",
         type: "GET",
@@ -100,11 +99,79 @@ export class Blog {
         },
       },
       columns: [
-        { data: "title", name: "title" },
-        { data: "content", name: "content" },
-        { data: "type_name", name: "type_name" },
-        { data: "status_name", name: "status_name" },
-        { data: "action", name: "action" }
+        {
+          data: "title",
+          name: "title",
+          render: function (data, type, row) {
+            let iconClass = row.type_id == 1 ? 'bi-journal-richtext text-warning' : 'bi-newspaper text-primary';
+            let iconBg = row.type_id == 1 ? 'bg-warning-light' : 'bg-primary-light';
+            let cleanDesc = row.description ? row.description.replace(/<\/?[^>]+(>|$)/g, "") : '';
+            return `
+              <div class="d-flex align-items-center">
+                <div class="avatar-icon-wrapper me-3 d-flex align-items-center justify-content-center rounded-3 ${iconBg}" style="width: 44px; height: 44px; min-width: 44px;">
+                  <i class="bi ${iconClass} fs-4"></i>
+                </div>
+                <div class="text-truncate-container" style="max-width: 480px;">
+                  <h6 class="mb-0.5 fw-bold text-dark" style="font-size: 0.95rem; margin-bottom: 3px;">${data}</h6>
+                  <p class="mb-0 text-muted text-truncate" style="font-size: 0.825rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${cleanDesc}">${cleanDesc}</p>
+                </div>
+              </div>
+            `;
+          }
+        },
+        {
+          data: "type_name",
+          name: "type_name",
+          render: function (data, type, row) {
+            let badgeClass = row.type_id == 1 ? 'bg-soft-warning' : 'bg-soft-primary';
+            let icon = row.type_id == 1 ? 'bi-journal-text' : 'bi-newspaper';
+            return `<span class="badge ${badgeClass} px-3 py-2 rounded-pill fw-semibold d-inline-flex align-items-center gap-1" style="font-size: 0.75rem;"><i class="bi ${icon}"></i> ${data}</span>`;
+          }
+        },
+        {
+          data: "status_name",
+          name: "status_name",
+          render: function (data, type, row) {
+            let isSuccess = row.status == 1;
+            let dotColor = isSuccess ? '#10b981' : '#ef4444';
+            let badgeBg = isSuccess ? 'bg-soft-success' : 'bg-soft-danger';
+            return `
+              <span class="badge ${badgeBg} px-3 py-2 rounded-pill fw-semibold d-inline-flex align-items-center gap-1.5" style="font-size: 0.75rem;">
+                <span class="status-dot" style="width: 8px; height: 8px; background-color: ${dotColor}; border-radius: 50%; display: inline-block;"></span>
+                ${data}
+              </span>
+            `;
+          }
+        },
+        {
+          data: "action",
+          name: "action",
+          orderable: false,
+          searchable: false,
+          render: function (data, type, row) {
+            let editUrl = `/blog/edit/${row.id}`;
+            let passiveText = window.translations.make_passive || 'Pasif Yap';
+            let activeText = window.translations.make_active || 'Aktif Yap';
+            let editText = window.translations.edit || 'Düzenle';
+            let deleteText = window.translations.delete || 'Sil';
+            
+            let statusBtn = row.status == 1 
+              ? `<button type="button" class="btn btn-action btn-outline-warning passiveBtn" data_id="${row.id}" title="${passiveText}"><i class="bi bi-eye-slash"></i></button>`
+              : `<button type="button" class="btn btn-action btn-outline-success activeBtn" data_id="${row.id}" title="${activeText}"><i class="bi bi-eye"></i></button>`;
+            
+            return `
+              <div class="d-flex align-items-center justify-content-end gap-1.5">
+                <a href="${editUrl}" class="btn btn-action btn-outline-primary" title="${editText}">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                ${statusBtn}
+                <button type="button" class="btn btn-action btn-outline-danger delBlogBtn" data_id="${row.id}" title="${deleteText}">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+            `;
+          }
+        }
       ],
       createdRow: function (row, data) {
         $(row).attr("data-id", data.id);

@@ -9,7 +9,13 @@ class BlogController extends Controller
 {
     public function index()
     {
-        return view('pages.Blog.index');
+        $stats = [
+            'total' => \App\Models\Blogs::count(),
+            'active' => \App\Models\Blogs::where('status', 1)->count(),
+            'blog' => \App\Models\Blogs::where('type_id', 1)->count(),
+            'news' => \App\Models\Blogs::where('type_id', 2)->count(),
+        ];
+        return view('pages.Blog.index', compact('stats'));
     }
 
     public function new()
