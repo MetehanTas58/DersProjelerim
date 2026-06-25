@@ -1,27 +1,33 @@
 @extends('layouts.app.app')
 
 @section('content')
-<div class="row">
-    <div class="col-sm-12">
-        <h3 class="">Kullanıcı Listesi</h3>
-        </div>
-        <div class="col-sm-12">
-<spam class="badge badge-primary bg-primary float-end" style="font-style:italic;">Kullanıcılar Yönetim Bölümü.</spam>
-
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-1 text-gray-800">Kullanıcı Listesi</h1>
+        <p class="text-muted mb-0 small">Sistemdeki tüm kayıtlı kullanıcıları ve durumlarını bu alandan yönetebilirsiniz.</p>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2" style="font-style: italic; font-weight: 500;">
+        <i class="bi bi-people-fill me-1"></i> Kullanıcılar Yönetim Bölümü
+    </span>
 </div>
-    </hr>
-    <hr>
-    </hr>
-    <div class="card">
-        <div class="card-header card-border">
-            <a href="{{route('users/new')}}"> <button type="button" class="btn btn-success min-btn"><i class="bi bi-plus-circle"></i>Yeni Ekle</button></a>
-            <button type="button" class="btn btn-primary min-btn editUserBtn">Düzenle</button>
-            <button type="button" class="btn btn-danger  min-btn delUserBtn">Sil</button>
 
-
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-transparent border-bottom d-flex justify-content-between align-items-center py-3">
+        <div class="d-flex gap-2">
+            <button type="button" class="btn btn-outline-primary min-btn topEditUserBtn" disabled>
+                <i class="bi bi-pencil-square me-1"></i> Düzenle
+            </button>
+            <button type="button" class="btn btn-outline-danger min-btn topDelUserBtn" disabled>
+                <i class="bi bi-trash-fill me-1"></i> Sil
+            </button>
         </div>
-        <div class="card/body">
-            <table class="table table-striped table-bordered" id="usersTable">
+        <a href="{{route('users/new')}}" class="btn btn-success min-btn">
+            <i class="bi bi-plus-circle me-1"></i> Yeni Ekle
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle w-100" id="usersTable">
                 <thead>
                     <tr>
                         <th>Adı Soyadı</th>
@@ -33,13 +39,12 @@
                 </thead>
                 <tbody>
                     <tr>
-
-
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+</div>
 
 @endsection
 

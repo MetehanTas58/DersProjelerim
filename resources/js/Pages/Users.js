@@ -15,35 +15,40 @@ export class Users {
   events() {
     let self = this;
 
-    $("body").on("click", ".saveUserBtn", function () {
-      self.saveUser();
-    }).on("click", ".delUserBtn", function () {
-      const user_id = $(this).attr('data_id');
-      self.delUser(user_id);
-    }).on("click", ".editUserBtn", function () {
-      const id = $(".selected").attr("data-id");
-      console.log(id);
-      if (id == undefined) {
-        Swal.fire("Hata", "Lütfen bir kullanıcı seçiniz", "error");
-        return;
-      }
-      window.location.href = "/users/edit/" + id;
-    })
-      .on("click", ".delUserBtn", function () {
+    $("body")
+      .off("click", ".saveUserBtn")
+      .on("click", ".saveUserBtn", function () {
+        self.saveUser();
+      })
+      .off("click", ".rowDelUserBtn")
+      .on("click", ".rowDelUserBtn", function (e) {
+        e.preventDefault();
+        const user_id = $(this).attr('data_id');
+        self.delUser(user_id);
+      })
+      .off("click", ".topEditUserBtn")
+      .on("click", ".topEditUserBtn", function () {
         const id = $(".selected").attr("data-id");
-        console.log(id);
+        if (id == undefined) {
+          Swal.fire("Hata", "Lütfen bir kullanıcı seçiniz", "error");
+          return;
+        }
+        window.location.href = "/users/edit/" + id;
+      })
+      .off("click", ".topDelUserBtn")
+      .on("click", ".topDelUserBtn", function () {
+        const id = $(".selected").attr("data-id");
         if (id == undefined) {
           Swal.fire("Hata", "Lütfen bir kullanıcı seçiniz", "error");
           return;
         }
         self.delUser(id);
-      })
-
-
-
+      });
   }
 
   getData() {
+    $(".topEditUserBtn, .topDelUserBtn").prop("disabled", true);
+
     const table = $("#usersTable").DataTable({
       processing: true,
       serverSide: true,
@@ -65,12 +70,18 @@ export class Users {
       }
     });
 
-    $("#usersTable tbody").off("click", "tr").on("click", "tr", function () {
+    $("#usersTable tbody").off("click", "tr").on("click", "tr", function (e) {
+      if ($(e.target).closest("a, button").length > 0) {
+        return;
+      }
+
       if ($(this).hasClass("selected")) {
         $(this).removeClass("selected");
+        $(".topEditUserBtn, .topDelUserBtn").prop("disabled", true);
       } else {
         table.$("tr.selected").removeClass("selected");
         $(this).addClass("selected");
+        $(".topEditUserBtn, .topDelUserBtn").prop("disabled", false);
       }
     });
   }

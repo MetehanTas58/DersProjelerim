@@ -20,20 +20,21 @@ class UsersClass
             return DataTables::of($data)
                 ->addColumn('status_name', function ($user) {
                     if ($user->status == 1) {
-                        return 'Aktif';
+                        return '<span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1"><i class="bi bi-check-circle-fill me-1"></i>Aktif</span>';
                     } else {
-                        return 'Pasif';
+                        return '<span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1"><i class="bi bi-x-circle-fill me-1"></i>Pasif</span>';
                     }
                 })
                 ->addColumn('action', function ($user) {
-                    return '<a href="' . route('users/edit', $user->id) . '" class="btn btn-primary btn-sm me-2 min-btn-table">Düzenle</a>'
-                        . '<a href="#" class="btn btn-danger btn-sm min-btn-table delUserBtn" data_id="' . $user->id . '">Sil</a>';
+                    return '<a href="' . route('users/edit', $user->id) . '" class="btn btn-sm btn-light text-primary border me-1 min-btn-table px-2" title="Düzenle"><i class="bi bi-pencil-square"></i></a>'
+                        . '<a href="#" class="btn btn-sm btn-light text-danger border min-btn-table px-2 rowDelUserBtn" data_id="' . $user->id . '" title="Sil"><i class="bi bi-trash-fill"></i></a>';
                 })
                 ->setRowAttr([
                     'data-id' => function($user) {
                         return $user->id;
                     }
-                ])               
+                ])
+                ->rawColumns(['status_name', 'action'])               
                 ->make(true);
 
         } catch (\Throwable $th) {

@@ -1,13 +1,140 @@
-table.table-striped tbody tr.selected > td,
-table.table-striped tbody tr.selected > th,
-#usersTable tbody tr.selected > td {
-    background-color: #0d6efd !important;
-    --bs-table-striped-bg: #0d6efd;
-    --bs-table-accent-bg: #0d6efd;
-    color: #fff !important;
+/* Premium design system additions for app.css */
+
+/* Card Styling */
+.card.border-0.shadow-sm {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    overflow: hidden;
 }
 
-#usersTable tbody tr.selected a,
-#usersTable tbody tr.selected .btn {
+/* Table Design */
+#usersTable {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#usersTable thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #dee2e6;
+    padding: 12px 16px;
+}
+
+#usersTable tbody td {
+    padding: 14px 16px;
+    font-size: 0.875rem;
+    color: #495057;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+/* Row Hover and Transitions */
+#usersTable tbody tr {
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+#usersTable tbody tr:hover {
+    background-color: #f8fafd !important;
+}
+
+/* Table Selection Styles */
+#usersTable tbody tr.selected {
+    background-color: #eef4ff !important;
+}
+
+#usersTable tbody tr.selected > td {
+    background-color: #eef4ff !important;
+    color: #2b3a55 !important;
+    font-weight: 500;
+    border-bottom-color: #dbe7ff;
+}
+
+/* Row Action Buttons inside selected rows */
+#usersTable tbody tr.selected .btn-light {
+    background-color: #ffffff !important;
+    border-color: #cbdbee !important;
+}
+
+/* Custom styles for badge elements */
+.badge-primary-subtle {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+}
+
+.bg-success-subtle {
+    background-color: #e6f4ea !important;
+}
+
+.text-success {
+    color: #137333 !important;
+}
+
+.border-success-subtle {
+    border-color: #c4eed0 !important;
+}
+
+.bg-danger-subtle {
+    background-color: #fce8e6 !important;
+}
+
+.text-danger {
+    color: #c5221f !important;
+}
+
+.border-danger-subtle {
+    border-color: #fad2cf !important;
+}
+
+/* DataTable Component Custom Layout Adjustments */
+.dt-search {
+    margin-bottom: 15px;
+}
+
+.dt-search input {
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    font-size: 0.875rem;
+}
+
+.dt-search input:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.dt-length select {
+    border-radius: 0.375rem;
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    font-size: 0.875rem;
+}
+
+.dt-paging {
+    margin-top: 15px;
+}
+
+.dt-paging .dt-paging-button {
+    border-radius: 0.25rem !important;
+    border: 1px solid #dee2e6 !important;
+    padding: 0.375rem 0.75rem !important;
+    background: #fff !important;
+    color: #0d6efd !important;
+    margin-left: 2px;
+}
+
+.dt-paging .dt-paging-button.current, 
+.dt-paging .dt-paging-button.current:hover {
+    background: #0d6efd !important;
     color: #fff !important;
+    border-color: #0d6efd !important;
+}
+
+.dt-paging .dt-paging-button:hover {
+    background: #e9ecef !important;
+    color: #0a58ca !important;
 }
