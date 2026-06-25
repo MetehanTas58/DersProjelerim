@@ -38,7 +38,8 @@ class BlogController extends Controller
                 'blogs.*',
                 \Illuminate\Support\Facades\DB::raw('COALESCE(bt.title, bt_fallback.title) as title'),
                 \Illuminate\Support\Facades\DB::raw('COALESCE(bt.description, bt_fallback.description) as description'),
-                \Illuminate\Support\Facades\DB::raw('COALESCE(bt.content, bt_fallback.content) as content')
+                \Illuminate\Support\Facades\DB::raw('COALESCE(bt.content, bt_fallback.content) as content'),
+                \Illuminate\Support\Facades\DB::raw('COALESCE(bt.image_path, bt_fallback.image_path) as image_path')
             )
             ->where('blogs.id', $id)
             ->firstOrFail();

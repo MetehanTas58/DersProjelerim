@@ -43,6 +43,23 @@ export class Blog {
       if ($("#blogTable").length > 0) {
         $("#blogTable").DataTable().ajax.reload();
       }
+    }).on("change", "#cover_image", function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        const $label = $(".cover-upload-label");
+        reader.onload = function (event) {
+          $label.css({
+            'background-image': 'url(' + event.target.result + ')',
+            'background-size': 'cover',
+            'background-repeat': 'no-repeat',
+            'background-position': 'center',
+            'border-color': 'transparent'
+          });
+          $label.find('.cover-upload-icon, .cover-upload-text, .cover-upload-hint').hide();
+        };
+        reader.readAsDataURL(file);
+      }
     })
 
     $("body").on("click", ".saveBlogBtn", function () {
@@ -193,19 +210,25 @@ export class Blog {
       tinymce.triggerSave();
     }
 
-    const blogdata = {
-      title: $('.title').val(),
-      description: $('.description').val(),
-      content: $('#blogContent').val(),
-      status: $('.status').val(),
-      type_id: $('.type_id').val(),
-      blog_id: $(".blog_id").val(),
-    };
+    const formData = new FormData();
+    formData.append('title', $('.title').val());
+    formData.append('description', $('.description').val());
+    formData.append('content', $('#blogContent').val());
+    formData.append('status', $('.status').val());
+    formData.append('type_id', $('.type_id').val());
+    formData.append('blog_id', $(".blog_id").val());
 
-    console.log(blogdata);
+    const fileInput = $('#cover_image')[0];
+    if (fileInput && fileInput.files[0]) {
+      formData.append('cover_image', fileInput.files[0]);
+    }
 
     try {
-      const { data } = await axios.post('/api/Blog/saveBlog', blogdata);
+      const { data } = await axios.post('/api/Blog/saveBlog', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
 
       if (data && data.status) {
         Swal.fire({ title: window.translations.success || 'Bilgi', text: data.message, icon: 'success' }).then(() => {

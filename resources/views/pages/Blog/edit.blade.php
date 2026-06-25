@@ -64,10 +64,10 @@
                                         <label for="cover_image" class="form-label fw-semibold text-secondary">
                                             <i class="fas fa-image me-1"></i> {{ __('messages.cover_image') }}
                                         </label>
-                                        <label for="cover_image" class="cover-upload-label">
-                                            <div class="cover-upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                                            <div class="cover-upload-text">{{ __('messages.click_to_select') }}</div>
-                                            <div class="cover-upload-hint">{{ __('messages.supported_formats') }}</div>
+                                        <label for="cover_image" class="cover-upload-label" style="{{ ($blog && $blog->image_path) ? 'background-image: url(' . $blog->image_path . '); background-size: cover; background-repeat: no-repeat; background-position: center; border-color: transparent;' : '' }}">
+                                            <div class="cover-upload-icon" style="{{ ($blog && $blog->image_path) ? 'display: none;' : '' }}"><i class="fas fa-cloud-upload-alt"></i></div>
+                                            <div class="cover-upload-text" style="{{ ($blog && $blog->image_path) ? 'display: none;' : '' }}">{{ __('messages.click_to_select') }}</div>
+                                            <div class="cover-upload-hint" style="{{ ($blog && $blog->image_path) ? 'display: none;' : '' }}">{{ __('messages.supported_formats') }}</div>
                                             <input type="file" id="cover_image" name="cover_image" class="cover-file-input" accept="image/*">
                                         </label>
                                     </div>

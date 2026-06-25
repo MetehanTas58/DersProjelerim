@@ -117,6 +117,28 @@ class BlogClass
             $blog->type_id = $data['type_id'] ?? $blog->type_id;
 
             if ($blog->save()) {
+                // Get existing translation to retain or clean up previous image
+                $imagePath = null;
+                if ($blog_id) {
+                    $existingTranslation = \Illuminate\Support\Facades\DB::table('blogs_translate')
+                        ->where('blog_id', $blog->id)
+                        ->where('lang_code', app()->getLocale())
+                        ->first();
+                    $imagePath = $existingTranslation ? $existingTranslation->image_path : null;
+                }
+
+                if (request()->hasFile('cover_image')) {
+                    // Delete old file if exists
+                    if ($imagePath && file_exists(public_path($imagePath))) {
+                        @unlink(public_path($imagePath));
+                    }
+                    
+                    $file = request()->file('cover_image');
+                    $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                    $file->move(public_path('uploads/blogs'), $filename);
+                    $imagePath = '/uploads/blogs/' . $filename;
+                }
+
                 // Çeviri güncelle (aktif dil)
                 \Illuminate\Support\Facades\DB::table('blogs_translate')->updateOrInsert(
                     ['blog_id' => $blog->id, 'lang_code' => app()->getLocale()],
@@ -124,6 +146,7 @@ class BlogClass
                         'title' => $data['title'],
                         'description' => $data['description'],
                         'content' => $data['content'],
+                        'image_path' => $imagePath,
                         'create_user_id' => Auth::user()->id,
                         'update_user_id' => Auth::user()->id,
                         'updated_at' => now(),
@@ -143,6 +166,7 @@ class BlogClass
                             'title' => $data['title'],
                             'description' => $data['description'],
                             'content' => $data['content'],
+                            'image_path' => $imagePath,
                             'create_user_id' => Auth::user()->id,
                             'update_user_id' => Auth::user()->id,
                             'created_at' => now(),
@@ -171,6 +195,16 @@ class BlogClass
             $blog = Blogs::find($blog_id);
             if ($blog == null) {
                 return ["status" => false, "message" => __('messages.not_found')];
+            }
+
+            // Get existing translation images and delete physical files
+            $translations = \Illuminate\Support\Facades\DB::table('blogs_translate')
+                ->where('blog_id', $blog_id)
+                ->get();
+            foreach ($translations as $trans) {
+                if ($trans->image_path && file_exists(public_path($trans->image_path))) {
+                    @unlink(public_path($trans->image_path));
+                }
             }
 
             // Delete translations first
